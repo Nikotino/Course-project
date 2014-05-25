@@ -20,23 +20,24 @@ Activities
 Measurements
 
 Mean value and Standard deviation of signal measurements collected from the accelerometer and gyroscope 3-axial raw signals tAcc-XYZ and tGyro-XYZ.  '-XYZ' is used to denote 3-axial signals in the X, Y and Z directions.
-tBodyAcc-XYZ: body acceleration 
-tGravityAcc-XYZ: gravity acceleration 
-tBodyAccJerk-XYZ: body acceleration Jerk signal
-tBodyGyro-XYZ: body angular velocity
-tBodyGyroJerk-XYZ: body angular velocity Jerk signal
-tBodyAccMag: magnitude of body acceleration calculated using the Euclidean norm
-tGravityAccMag: magnitude of gravity acceleration calculated using the Euclidean norm
-tBodyAccJerkMag: magnitude of body acceleration Jerk signal calculated using the Euclidean norm
-tBodyGyroMag: magnitude of gravity acceleration calculated using the Euclidean norm
-tBodyGyroJerkMag: magnitude of gravity acceleration Jerk signal calculated using the Euclidean norm
-fBodyAcc-XYZ: Fast Fourier Transform applied to body acceleration signal
-fBodyAccJerk-XYZ: Fast Fourier Transform applied to body acceleration Jerk signal
-fBodyGyro-XYZ: Fast Fourier Transform applied to gravity acceleration signal
-fBodyAccMag: Fast Fourier Transform applied to body acceleration magnitude
-fBodyAccJerkMag: Fast Fourier Transform applied to body acceleration Jerk signal magnitude
-fBodyGyroMag: Fast Fourier Transform applied to gravity acceleration signal
-fBodyGyroJerkMag: Fast Fourier Transform applied to gravity acceleration Jerk signal
+-	tBodyAcc-XYZ: body acceleration 
+-	tGravityAcc-XYZ: gravity acceleration 
+-	tBodyAccJerk-XYZ: body acceleration Jerk signal
+-	tBodyGyro-XYZ: body angular velocity
+-	tBodyGyroJerk-XYZ: body angular velocity Jerk signal
+-	tBodyAccMag: magnitude of body acceleration calculated using the Euclidean norm
+-	tGravityAccMag: magnitude of gravity acceleration calculated using the Euclidean norm
+-	tBodyAccJerkMag: magnitude of body acceleration Jerk signal calculated using the Euclidean norm
+-	tBodyGyroMag: magnitude of gravity acceleration calculated using the Euclidean norm
+-	tBodyGyroJerkMag: magnitude of gravity acceleration Jerk signal calculated using the Euclidean norm
+-	fBodyAcc-XYZ: Fast Fourier Transform applied to body acceleration signal
+-	fBodyAccJerk-XYZ: Fast Fourier Transform applied to body acceleration Jerk signal
+-	fBodyGyro-XYZ: Fast Fourier Transform applied to gravity acceleration signal
+-	fBodyAccMag: Fast Fourier Transform applied to body acceleration magnitude
+-	fBodyAccJerkMag: Fast Fourier Transform applied to body acceleration Jerk signal magnitude
+-	fBodyGyroMag: Fast Fourier Transform applied to gravity acceleration signal
+-	fBodyGyroJerkMag: Fast Fourier Transform applied to gravity acceleration Jerk signal
+
 
 ##2. Data source
 The initial data source is obtained from Human Activity Recognition database and included the following files:

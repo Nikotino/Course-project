@@ -58,4 +58,5 @@ means[rowmeans,i]<-mean(X_sk[ ,i], na.rm=TRUE)
 means[rowmeans, 67]=s
 means[rowmeans,68]= activities[k]
 }}
+colnames(means)<-c(features_t[2,selection], "subject","activity")
 write.table(means, file= "C:/Users/vnuretdinova/Documents/R-files/means.txt", sep=",")

@@ -1,7 +1,7 @@
 RUN ANALYSIS
 ##1. Variables
 
-Means
+#Means
 Averages of measurements for 30 subjects, 6 types of activities, 66 types of measurements.  Measurements represent different data collected from the accelerometers from the Samsung Galaxy S smartphone
 
 Subjects

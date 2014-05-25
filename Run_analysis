@@ -26,12 +26,9 @@ colnames(activity) <- "activity"
 X<-cbind(X, subject,activity)
 
 ## 2. Extracts only the measurements on the mean and standard deviation for each measurement.
-V <-matrix(nrow=2,ncol=561)
-rownames(V)<-c("mean","sd")
-for (i in 1:561){
-V[1,i]<-mean (X[ ,i], na.rm=TRUE)
-V[2,i]<-sd(X[ ,i], na.rm=TRUE)
-}
+selection<-which(grepl("mean()|std()",features[,2])==1,arr.ind=TRUE)
+X_selected<-X[,c(selection, 562,563)]
+ncol(X_selected) ##ncol in new matrix will be used in step 5
 
 # 3. Uses descriptive activity names to name the activities in the data set
 activities<-read.table("activity_labels.txt")
@@ -39,20 +36,21 @@ activities<-activities[,2]  ##converting activity_label column from factor to ve
 activities<-as.character(activities)
 
 # 4. Appropriately labels the data set with descriptive activity names.
-X[,"activity"]<-as.numeric(X[,"activity"])
+X_selected[,"activity"]<-as.numeric(X[,"activity"])
 for (k in 1:6) {
-X[,"activity"]<-gsub (k, activities[k], X[,"activity"])}
+X_selected[,"activity"]<-gsub (k, activities[k], X[,"activity"])}
 
 # 5. Creates a second, independent tidy data set with the average of each variable for each activity and each subject. 
-means<-matrix(nrow=180,ncol=563)
+means<-matrix(nrow=180,ncol=81)
 for (s in 1:30) {
 for (k in 1:6) {
-for (i in 1:561){
+for (i in 1:79){
 X_s<- X[X$subject== s,]
-X_sk<-X_s[X_s$activity== k,]
+X_sk<-X_s[X_s$activity== activities[k],]
 rowmeans=(s-1)*6+k
 means[rowmeans,i]<-mean(X_sk[ ,i], na.rm=TRUE)
-means[rowmeans,562]=s
-means[rowmeans,563]= activities[k]
-}}}
+}
+means[rowmeans, 80]=s
+means[rowmeans,81]= activities[k]
+}}
 write.table(means, file= "C:/Users/vnuretdinova/Documents/R-files/means.txt", sep=",")

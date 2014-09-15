@@ -64,4 +64,4 @@ This resulted into reduction of the dataframe from 563 to 68 columns
 3.	Labeling activity dataset with the names of activity
 Numeric information on activity types in the “activity” column has been replaced with labels extracted from “'activity_labels.txt'” file
 4.	Creating a second, independent tidy data set with the average of each variable for each activity and each subject. 
-New dataset has been created which consequently extracts subset from X dataframe for each subject and measurement, and calculates the average of the subset.  The new dataset is names “means” and saved as txt.file
+New dataset has been created melting and casting the X_selected dataframe with reshape2 package.  The new dataset is names “means” and saved as txt.file

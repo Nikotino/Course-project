@@ -38,13 +38,12 @@ X_selected<-X[,c(selection, 562,563)]
 
 ## 3. Uses descriptive activity names to name the activities in the data set
 activities<-read.table("activity_labels.txt")
-activities<-activities[,2]  ##converting activity_label column from factor to vector
-activities<-as.character(activities)
+activities<-activities[,2]  
 
 ## 4. Appropriately labels the data set with descriptive activity names.
-X_selected[,"activity"]<-as.numeric(X[,"activity"])
-for (k in 1:6) {
-  X_selected[,"activity"]<-gsub (k, activities[k], X[,"activity"])}
+##change "activity" column of X_selected to factor, and replace with "activities" levels
+X_selected[,"activity"]<-as.factor(X[,"activity"])
+levels(X_selected[,"activity"])<-levels(activities)
 
 ## 5. Creates a second, independent tidy data set with the average of each variable for each activity and each subject. 
 library(reshape2)

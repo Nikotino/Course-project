@@ -1,62 +1,55 @@
-## 1. Merges the training and the test sets to create one data set.
-path= "C:/Users/vnuretdinova/Documents/R-files/UCI HAR Dataset"
-setwd(paste0(path,"/train"))
+## 1. Merge the training and the test sets to create one data set
+path="C:/Users/Veronika/Documents/R files/UCI HAR Dataset"
+setwd(paste(path,"/train",sep=""))
 x_train<-read.table("X_train.txt")
 y_train<-read.table("y_train.txt")
 subject_train<-read.table("subject_train.txt")
-dim(x_train), str(x_train)
-dim(y_train), str(y_train)
-dim(subject_train), str(subject_train)
-setwd(paste0(path,"/test"))
+
+setwd(paste(path,"/test",sep=""))
 x_test<-read.table("X_test.txt")
 y_test<-read.table("y_test.txt")
 subject_test<-read.table("subject_test.txt ")
-dim(x_test), str(x_test)
-dim(y_test), str(y_test)
-dim(subject_test) , str(subject_test) 
+##Understanding dimensions to correctly bind the tables
+dim(y_test)
+dim(x_test)
+dim(subject_test)
+
 X<-rbind(x_test,x_train)
+
 setwd(path)
 features<- read.table ("features.txt")
-dim(features)  ##understand dimension of the features
+str(features)
+##features table has to be transposed 
 features_t<-t(features)
 colnames(X) <- features_t[2,]
+
+##bind X table to subject and activity data
 subject<- rbind(subject_test, subject_train)
-dim(subject)
 colnames(subject) <- "subject"
 activity<- rbind(y_test,y_train)
-dim(activity)
 colnames(activity) <- "activity"
 X<-cbind(X, subject,activity)
 
 ## 2. Extracts only the measurements on the mean and standard deviation for each measurement.
-selection<-which(grepl("mean()|std()",features[,2])==1,arr.ind=TRUE)
-extra_selection<- which(grepl("meanFreq()",features[,2])==1,arr.ind=TRUE)
-selection<-setdiff(selection,extra_selection)	
-X_selected<-X[,c(selection, 562,563)]
-ncol(X_selected) ##ncol in new matrix will be used in step 5
+selection<-which(grepl("mean()|std()",features[,2])==TRUE)
 
-# 3. Uses descriptive activity names to name the activities in the data set
+##Select mean and std variables, plus activity and subject columns
+X_selected<-X[,c(selection, 562,563)]
+
+## 3. Uses descriptive activity names to name the activities in the data set
 activities<-read.table("activity_labels.txt")
 activities<-activities[,2]  ##converting activity_label column from factor to vector
 activities<-as.character(activities)
 
-# 4. Appropriately labels the data set with descriptive activity names.
+## 4. Appropriately labels the data set with descriptive activity names.
 X_selected[,"activity"]<-as.numeric(X[,"activity"])
 for (k in 1:6) {
-X_selected[,"activity"]<-gsub (k, activities[k], X[,"activity"])}
+  X_selected[,"activity"]<-gsub (k, activities[k], X[,"activity"])}
 
-# 5. Creates a second, independent tidy data set with the average of each variable for each activity and each subject. 
-means<-matrix(nrow=180,ncol=68)
-for (s in 1:30) {
-for (k in 1:6) {
-for (i in 1:66){
-X_s<- X[X_selected$subject== s,]
-X_sk<-X_s[X_s$activity== activities[k],]
-rowmeans=(s-1)*6+k
-means[rowmeans,i]<-mean(X_sk[ ,i], na.rm=TRUE)
-}
-means[rowmeans, 67]=s
-means[rowmeans,68]= activities[k]
-}}
-colnames(means)<-c(features_t[2,selection], "subject","activity")
-write.table(means, file= "C:/Users/vnuretdinova/Documents/R-files/means.txt", sep=",")
+## 5. Creates a second, independent tidy data set with the average of each variable for each activity and each subject. 
+library(reshape2)
+X_melt<-melt(X_selected,id=c("subject","activity"),measure.vars=c(1:79))
+X_mean<-dcast(X_melt,subject+activity~variable,mean)
+
+##Save the results
+write.table(X_mean, file= paste0(path,"/means.txt",sep=""), sep=",",row.name=FALSE)

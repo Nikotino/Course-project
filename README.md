@@ -16,5 +16,4 @@ activities is the character vector which contains the names of activities extrac
 # 4. Appropriately labels the data set with descriptive activity names.
 The numbers in the “activities” column of X_selected are substituted with labels based on “activities” vector created in step 3
 #5. Appropriately labels the data set with descriptive activity names.
-I use melt and dcast functions of reshape2 librqry to structure X_selected
-I create the new dataframe “X_mean” with 81 columns (79 measurements, subject, activity columns) 180 rows (30 subjects by 6 activities)
+I use melt and dcast functions of reshape2 librqry to structure X_selected. The new dataframe “X_mean” contains mean values, has  81 columns (79 measurements, subject, activity columns) 180 rows (30 subjects by 6 activities)
